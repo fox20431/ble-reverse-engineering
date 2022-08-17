@@ -1,11 +1,15 @@
+const app = getApp<IAppOption>()
 Page({
+  onLoad() {
+    console.log(app.globalData);
+  },
   scan() {
     wx.openBluetoothAdapter({
       // mode: 'central',
     }).then((res) => {
       console.log(`wx.openBluetoothAdapter`, res);
       // 开始搜索附近的蓝牙外围设备
-      return wx.startBluetoothDevicesDiscovery()
+      return wx.startBluetoothDevicesDiscovery({})
     }).then((res) => {
       console.log(res);
       wx.onBluetoothDeviceFound(filterSpecifiedDevice)
@@ -28,8 +32,8 @@ Page({
   }
 })
 
-function filterSpecifiedDevice(res) {
-  res.devices.forEach((device) => {
+function filterSpecifiedDevice(res: any) {
+  res.devices.forEach((device:any) => {
     console.log('bluetooth device found', device)
   })
   console.log();
