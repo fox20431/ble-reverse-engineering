@@ -1,12 +1,44 @@
 <view>
-  <view>
-    <button class="btn" bindtap="scan">scan</button>
-    <button class="btn">show</button>
-    <button class="btn">custom</button>
-    <button class="btn" type="warn">end</button>
+  <view class="bluetooth-control">
+    <view style="display: flex; flex-direction: row;">
+      <button class="btn" bindtap="scan">scan</button>
+      <button class="btn" bindtap="stopScanning">stop scanning</button>
+    </view>
+    <button class="btn" type="warn" bindtap="terminate">terminate</button>
+    <view class="border"></view>
   </view>
-  <view class="border"></view>
-  <view>
-    <view></view>
+  <view class="device-list">
+    <!-- <view class="device-item">
+      <view>
+        <view class="device-name">HW807-0224194</view>
+        <view class="device-more-info">
+          <view class="info-item">xxx</view>
+          <view class="info-item">xxx</view>
+        </view>
+      </view>
+      <view class="iconfont icon-right"></view>
+    </view> -->
+    <view class="device-item" wx:for="{{scanneddDevices}}" wx:key="index" data-device-id="{{item.deviceId}}" bindtap="connect">
+      <view>
+        <view class="device-name">{{item.name}}</view>
+        <view class="device-more-info">
+          <view class="info-item">设备id：{{item.deviceId}}</view>
+          <view class="info-item">信号强度：{{item.rssi}}</view>
+        </view>
+      </view>
+      <view class="iconfont icon-right"></view>
+    </view>
+  </view>
+  <view wx:if="{{connected}}" class="dashboard">
+    <view class="border"></view>
+    <view class="control-btns">
+      <button class="btn" bindtap="getServAndChar">get services and characteristics</button>
+      <button class="btn" bindtap="readAndNotifyAllChar">read/notify all characteristics</button>
+      <view style="display: flex; flex-direction: row;">
+        <button class="btn" bindtap="listenCharValue">listen on</button>
+        <button class="btn" bindtap="stopListeningCharValue">listen off</button>
+      </view>
+      <button class="btn" type="warn" bindtap="disconnect">disconnect</button>
+    </view>
   </view>
 </view>
