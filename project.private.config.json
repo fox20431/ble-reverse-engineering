@@ -1,0 +1,6 @@
+{
+    "projectname": "ble-reverse-engineering",
+    "setting": {
+        "compileHotReLoad": true
+    }
+}

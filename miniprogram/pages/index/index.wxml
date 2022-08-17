@@ -1,0 +1,12 @@
+<view>
+  <view>
+    <button class="btn" bindtap="scan">scan</button>
+    <button class="btn">show</button>
+    <button class="btn">custom</button>
+    <button class="btn" type="warn">end</button>
+  </view>
+  <view class="border"></view>
+  <view>
+    <view></view>
+  </view>
+</view>
