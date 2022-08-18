@@ -1,6 +1,8 @@
 // app.ts
 App<IAppOption>({
-  globalData: {},
+  globalData: {
+    deviceId: ""
+  },
   onLaunch() {
     wx.setKeepScreenOn({
       keepScreenOn: true,

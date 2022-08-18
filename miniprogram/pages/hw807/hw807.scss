@@ -1,1 +1,17 @@
-/* pages/hw807/hw807.wxss */
+.max-hr {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	margin: 0 48rpx;
+	.max-hr-input {
+		height: 2em;
+		border-style:solid;
+		border-width:2rpx;
+		border-radius: 0.5em;
+		padding: 0 0.5em;
+	}
+	.max-hr-btn {
+		width: auto;
+	}
+}

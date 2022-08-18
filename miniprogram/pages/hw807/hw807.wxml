@@ -1,2 +1,8 @@
-<!--pages/hw807/hw807.wxml-->
-<text>pages/hw807/hw807.wxml</text>
+<view>
+	<view>
+		<view class="max-hr">
+			<input class="max-hr-input" type="text" placeholder="Input max heart rate." bindinput="getMaxHr"/>
+			<button class="max-hr-btn" bindtap="setMaxHr">SET</button>
+		</view>
+	</view>
+</view>

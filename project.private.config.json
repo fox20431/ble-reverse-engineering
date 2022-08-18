@@ -2,5 +2,18 @@
     "projectname": "ble-reverse-engineering",
     "setting": {
         "compileHotReLoad": true
+    },
+    "condition": {
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "HW807",
+                    "pathName": "pages/hw807/hw807",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                }
+            ]
+        }
     }
 }

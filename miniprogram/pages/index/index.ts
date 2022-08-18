@@ -16,7 +16,6 @@ interface Custom {
   disconnect: Function;
 }
 let currentPage: WechatMiniprogram.Page.Instance<Data, Custom>
-let deviceId: string = ""
 Page({
   data: {
     scanneddDevices: [],
@@ -65,29 +64,29 @@ Page({
   },
 
   connect(e: WechatMiniprogram.TouchEvent) {
-    deviceId = e.currentTarget.dataset.deviceId;
+    app.globalData.deviceId = e.currentTarget.dataset.deviceId;
     wx.createBLEConnection({
-      deviceId: deviceId
+      deviceId: app.globalData.deviceId
     }).then((res) => {
       console.log(`create ble connect`, res);
       currentPage.setData({
         connected: true,
         scanneddDevices: [],
       })
-      return wx.getBLEDeviceServices({ deviceId: deviceId })
+      return wx.getBLEDeviceServices({ deviceId: app.globalData.deviceId })
     }).catch((res) => {
       console.error(res);
     })
   },
   getServAndChar() {
     wx.getBLEDeviceServices({
-      deviceId: deviceId
+      deviceId: app.globalData.deviceId
     }).then((res) => {
-      console.log(`services from device ${deviceId}`, res);
+      console.log(`services from device ${app.globalData.deviceId}`, res);
       res.services.forEach((service) => {
         if (service.isPrimary) {
           wx.getBLEDeviceCharacteristics({
-            deviceId: deviceId,
+            deviceId: app.globalData.deviceId,
             serviceId: service.uuid,
           }).then((result) => {
             console.log(`characteristics from service ${service.uuid}`, result)
@@ -128,19 +127,19 @@ Page({
   },
   readAndNotifyAllChar() {
     wx.getBLEDeviceServices({
-      deviceId: deviceId
+      deviceId: app.globalData.deviceId
     }).then((res) => {
       res.services.forEach((service) => {
         if (service.isPrimary) {
           wx.getBLEDeviceCharacteristics({
-            deviceId: deviceId,
+            deviceId: app.globalData.deviceId,
             serviceId: service.uuid,
           }).then((result) => {
             result.characteristics.forEach((characteristic) => {
               if (characteristic.properties.read) {
                 console.log(`has read characteristic ${characteristic.uuid}`);
                 wx.readBLECharacteristicValue({
-                  deviceId: deviceId,
+                  deviceId: app.globalData.deviceId,
                   serviceId: service.uuid,
                   characteristicId: characteristic.uuid,
                 });
@@ -148,7 +147,7 @@ Page({
               if (characteristic.properties.notify) {
                 console.log(`has notified characteristic ${characteristic.uuid}`);
                 wx.notifyBLECharacteristicValueChange({
-                  deviceId: deviceId,
+                  deviceId: app.globalData.deviceId,
                   serviceId: service.uuid,
                   characteristicId: characteristic.uuid,
                   state: true,
@@ -175,7 +174,7 @@ Page({
   },
   disconnect() {
     wx.closeBLEConnection({
-      deviceId: deviceId
+      deviceId: app.globalData.deviceId
     }).then((res) => {
       console.log(`close ble connect`, res);
       currentPage.setData({
@@ -211,13 +210,13 @@ function filterSpecifiedDevice(res: any) {
 
 function handleWithCharProperties(readableCallback: (res: any) => void, notifiableCallback: (res: any) => void, writableCallback: (res: any) => void) {
   wx.getBLEDeviceServices({
-    deviceId: deviceId
+    deviceId: app.globalData.deviceId
   }).then((res) => {
-    console.log(`services from device ${deviceId}`, res);
+    console.log(`services from device ${app.globalData.deviceId}`, res);
     res.services.forEach((service) => {
       if (service.isPrimary) {
         wx.getBLEDeviceCharacteristics({
-          deviceId: deviceId,
+          deviceId: app.globalData.deviceId,
           serviceId: service.uuid,
         }).then((result) => {
           result.characteristics.forEach((item) => {
