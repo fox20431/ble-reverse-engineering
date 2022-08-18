@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/hw807/hw807",
     "pages/logs/logs"
   ],
   "window": {

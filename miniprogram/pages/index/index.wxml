@@ -7,7 +7,7 @@
     <button class="btn" type="warn" bindtap="terminate">terminate</button>
     <view class="border"></view>
   </view>
-  <view class="device-list">
+  <scroll-view scroll-y="true" class="device-list">
     <!-- <view class="device-item">
       <view>
         <view class="device-name">HW807-0224194</view>
@@ -28,7 +28,7 @@
       </view>
       <view class="iconfont icon-right"></view>
     </view>
-  </view>
+  </scroll-view>
   <!-- <view wx:if="{{connected}}" class="dashboard"> -->
   <view class="dashboard">
     <view class="border"></view>
@@ -44,6 +44,7 @@
         <button class="btn" bindtap="listenCharValue">listen on</button>
         <button class="btn" bindtap="stopListeningCharValue">listen off</button>
       </view>
+      <button class="btn" bindtap="navToHw807">navigate to hw</button>
       <button class="btn" type="warn" bindtap="disconnect">disconnect</button>
     </view>
   </view>

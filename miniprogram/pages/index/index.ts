@@ -168,6 +168,11 @@ Page({
   stopListeningCharValue() {
     wx.offBLECharacteristicValueChange(listenCharValueCallback)
   },
+  navToHw807() {
+    wx.navigateTo({
+      url: "/pages/hw807/hw807"
+    }).then()
+  },
   disconnect() {
     wx.closeBLEConnection({
       deviceId: deviceId
