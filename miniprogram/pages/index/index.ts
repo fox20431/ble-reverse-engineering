@@ -24,6 +24,9 @@ Page({
   },
   onLoad() {
     currentPage = this;
+    wx.onBluetoothAdapterStateChange((res) => {
+      console.log("bluetooth adapter state changed", res);
+    })
   },
   scan() {
     wx.openBluetoothAdapter({
@@ -37,9 +40,6 @@ Page({
       wx.onBluetoothDeviceFound(filterSpecifiedDevice)
     }).catch((res) => {
       console.error(`bluetooth`, res);
-      wx.onBluetoothAdapterStateChange((res) => {
-        console.log("bluetooth adapter state changed", res);
-      })
       switch (res.errCode) {
         case 10001:
           wx.showToast({
@@ -58,6 +58,9 @@ Page({
   terminate() {
     wx.closeBluetoothAdapter().then((res) => {
       console.log(`close bluetooth adapter`, res);
+      currentPage.setData({
+        connected: false
+      })
     })
   },
 
@@ -69,6 +72,7 @@ Page({
       console.log(`create ble connect`, res);
       currentPage.setData({
         connected: true,
+        scanneddDevices: [],
       })
       return wx.getBLEDeviceServices({ deviceId: deviceId })
     }).catch((res) => {
@@ -93,6 +97,34 @@ Page({
         }
       })
     })
+  },
+  findReadableChar() {
+    handleWithCharProperties(
+      (res) => {
+        console.log(`readable`, res);
+      },
+      () => { },
+      () => { }
+    )
+  },
+  findNotifiableChar() {
+    handleWithCharProperties(
+      () => { },
+      (res) => {
+        console.log(`notifiable`, res);
+      },
+      () => { }
+    )
+
+  },
+  findWritableChar() {
+    handleWithCharProperties(
+      () => { },
+      () => { },
+      (res) => {
+        console.log(`writable`, res);
+      },
+    )
   },
   readAndNotifyAllChar() {
     wx.getBLEDeviceServices({
@@ -141,6 +173,9 @@ Page({
       deviceId: deviceId
     }).then((res) => {
       console.log(`close ble connect`, res);
+      currentPage.setData({
+        connected: false
+      })
     })
   }
 })
@@ -167,4 +202,34 @@ function filterSpecifiedDevice(res: any) {
     }
   })
   console.log();
+}
+
+function handleWithCharProperties(readableCallback: (res: any) => void, notifiableCallback: (res: any) => void, writableCallback: (res: any) => void) {
+  wx.getBLEDeviceServices({
+    deviceId: deviceId
+  }).then((res) => {
+    console.log(`services from device ${deviceId}`, res);
+    res.services.forEach((service) => {
+      if (service.isPrimary) {
+        wx.getBLEDeviceCharacteristics({
+          deviceId: deviceId,
+          serviceId: service.uuid,
+        }).then((result) => {
+          result.characteristics.forEach((item) => {
+            if (item.properties.read) {
+              readableCallback(item)
+            }
+            if (item.properties.notify) {
+              notifiableCallback(item)
+            }
+            if (item.properties.write) {
+              writableCallback(item)
+            }
+          })
+        }).catch((result) => {
+          console.error(`characteristics from service ${service.uuid}`, result);
+        })
+      }
+    })
+  })
 }

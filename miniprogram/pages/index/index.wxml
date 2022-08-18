@@ -29,10 +29,16 @@
       <view class="iconfont icon-right"></view>
     </view>
   </view>
-  <view wx:if="{{connected}}" class="dashboard">
+  <!-- <view wx:if="{{connected}}" class="dashboard"> -->
+  <view class="dashboard">
     <view class="border"></view>
     <view class="control-btns">
       <button class="btn" bindtap="getServAndChar">get services and characteristics</button>
+      <view style="display: flex; flex-direction: row;">
+        <button class="btn" bindtap="findReadableChar">readable</button>
+        <button class="btn" bindtap="findNotifiableChar">notifiable</button>
+        <button class="btn" bindtap="findWritableChar">writable</button>
+      </view>
       <button class="btn" bindtap="readAndNotifyAllChar">read/notify all characteristics</button>
       <view style="display: flex; flex-direction: row;">
         <button class="btn" bindtap="listenCharValue">listen on</button>
