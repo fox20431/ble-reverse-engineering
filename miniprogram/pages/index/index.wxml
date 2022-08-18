@@ -7,13 +7,13 @@
     <button class="btn" type="warn" bindtap="terminate">terminate</button>
     <view class="border"></view>
   </view>
-  <scroll-view scroll-y="true" class="device-list">
-    <!-- <view class="device-item">
+  <scroll-view scroll-y="true" enable-flex="true" class="device-list">
+    <!-- <view class="device-item" >
       <view>
-        <view class="device-name">HW807-0224194</view>
+        <view class="device-name">HW100000000</view>
         <view class="device-more-info">
-          <view class="info-item">xxx</view>
-          <view class="info-item">xxx</view>
+          <view class="info-item">设备id：1d:df:ss:12:22</view>
+          <view class="info-item">信号强度：32</view>
         </view>
       </view>
       <view class="iconfont icon-right"></view>
