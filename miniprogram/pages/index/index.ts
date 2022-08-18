@@ -237,3 +237,5 @@ function handleWithCharProperties(readableCallback: (res: any) => void, notifiab
     })
   })
 }
+
+export{}
