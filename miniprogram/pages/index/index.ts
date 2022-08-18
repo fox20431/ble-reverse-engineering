@@ -26,6 +26,9 @@ Page({
     wx.onBluetoothAdapterStateChange((res) => {
       console.log("bluetooth adapter state changed", res);
     })
+    wx.onBLEConnectionStateChange((res) => {
+      console.log("ble connect state change", res)
+    })
   },
   scan() {
     wx.openBluetoothAdapter({
@@ -33,7 +36,9 @@ Page({
     }).then((res) => {
       console.log(`wx.openBluetoothAdapter`, res);
       // 开始搜索附近的蓝牙外围设备
-      return wx.startBluetoothDevicesDiscovery({})
+      return wx.startBluetoothDevicesDiscovery({
+        allowDuplicatesKey: true
+      })
     }).then((res) => {
       console.log(res);
       wx.onBluetoothDeviceFound(filterSpecifiedDevice)
@@ -189,7 +194,7 @@ function listenCharValueCallback(res: any) {
 }
 
 
-function filterSpecifiedDevice(res: any) {
+function filterSpecifiedDevice(res: any) { // 不用担心push内容重复，每一轮discovery都会调用该函数，该函数调用的时候已经初始化`tempDevices`
   let tempDevices: Array<any> = []
   res.devices.forEach((device: any) => {
     console.log('bluetooth device found', device)
@@ -238,4 +243,4 @@ function handleWithCharProperties(readableCallback: (res: any) => void, notifiab
   })
 }
 
-export{}
+export { }
