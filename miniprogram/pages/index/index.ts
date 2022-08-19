@@ -4,16 +4,16 @@ interface Data {
   connected: boolean
 }
 interface Custom {
-  scan: Function;
-  stopScanning: Function;
-  terminate: Function;
+  scan: () => void;
+  stopScanning: () => void;
+  terminate: () => void;
 
-  connect: Function;
-  getServAndChar: Function;
-  readAndNotifyAllChar: Function;
-  listenCharValue: Function;
-  stopListeningCharValue: Function;
-  disconnect: Function;
+  connect: (e: WechatMiniprogram.TouchEvent) => void;
+  getServAndChar: () => void;
+  readAndNotifyAllChar: () => void;
+  listenCharValue: () => void;
+  stopListeningCharValue: () => void;
+  disconnect: () => void;
 }
 let currentPage: WechatMiniprogram.Page.Instance<Data, Custom>
 Page({
