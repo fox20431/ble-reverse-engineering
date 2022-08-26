@@ -17,6 +17,7 @@
     "strict": true,
     "strictPropertyInitialization": true,
     "lib": ["ES2020"],
+    "outDir": "./built",
     "typeRoots": [
       "./typings",
       "./node_modules/@types"
