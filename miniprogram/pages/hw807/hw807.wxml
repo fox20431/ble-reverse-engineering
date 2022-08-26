@@ -1,8 +1,19 @@
 <view>
-	<view>
-		<view class="max-hr">
-			<input class="max-hr-input" type="text" placeholder="Input max heart rate." bindinput="getMaxHr"/>
+	<view class="max-hr">
+		<view>
+			<text>设置最大心率</text>
+		</view>
+		<view class="setting-max-hr">
+			<input class="max-hr-input" type="text" placeholder="num." bindinput="getMaxHr" />
 			<button class="max-hr-btn" bindtap="setMaxHr">SET</button>
+		</view>
+	</view>
+	<view>
+		<view class="hr-display">
+			<view>
+				<button class="show-btn" bindtap="displayHr">Show</button>
+			</view>
+			<text class="hr-content">heart rate: {{hr == 0 ? '--': hr}}</text>
 		</view>
 	</view>
 </view>

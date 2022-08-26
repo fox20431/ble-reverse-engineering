@@ -5,6 +5,7 @@ const app = getApp<IAppOption>()
 Page({
 
     data: {
+        hr: 0
     },
 
     onLoad() {
@@ -26,6 +27,9 @@ Page({
         }).catch((res) => {
             console.error(res);
         })
+    },
+    displayHr() {
+        
     }
 })
 
@@ -124,5 +128,3 @@ function packageSendCmd(headerNumber: number, data: ArrayBuffer) {
     }
     return cmdDataArray;
 }
-
-export { }
