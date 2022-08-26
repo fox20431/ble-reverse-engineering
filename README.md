@@ -1,3 +1,13 @@
+# BLE 反向工程（伪）
+
+## 介绍
+
+平台：小程序
+设备：[HW807](https://manuals.plus/coospo/hw807-heart-rate-monitor-with-armband-manual#ixzz7cIFCv5t6)
+目的：了解设备运作方式（重心在驱动）
+
+## 其他相关
+
 返回数据解析：一个包包含20个字节（byte）,一个字节包含8 bit
 第一个字节为固定值：0XFF
 第二个字节为标识符：第0-3bit传输层包序号（0-F），多包使用，单包为0
