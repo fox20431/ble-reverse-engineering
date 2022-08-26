@@ -10,8 +10,9 @@
 	</view>
 	<view>
 		<view class="hr-display">
-			<view>
-				<button class="show-btn" bindtap="displayHr">Show</button>
+			<view class="hr-btns">
+				<button class="show-btn" bindtap="showHr">Show</button>
+				<button class="hide-btn" bindtap="hideHr">Hide</button>
 			</view>
 			<text class="hr-content">heart rate: {{hr == 0 ? '--': hr}}</text>
 		</view>

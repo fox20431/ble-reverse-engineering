@@ -28,7 +28,16 @@
 	flex-direction: row;
 	justify-content: space-evenly;
 	align-items: center;
-	.show-btn {
-		width: 32vw;
+	.hr-btns {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		align-items: center;
+		.show-btn {
+			width: 24vw;
+		}
+		.hide-btn {
+			width: 24vw;
+		}
 	}
 }
